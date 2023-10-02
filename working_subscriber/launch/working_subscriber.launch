@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="working_subscriber" type="cppFile" name="subber" output="screen" />
+</launch>

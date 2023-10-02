@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="working_publisher" type="LaunchType" name="publisher_node" output="screen" />
+</launch>
