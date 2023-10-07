@@ -9,7 +9,7 @@ project(service_client_pkg)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  trajectory_by_name_src
+  trajectory_by_name_srv
 )
 
 ## System dependencies are found with CMake's conventions
@@ -149,9 +149,9 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-addexecutable(simple_service_client src/simple_service_client.cpp)
-add_dependencies(simple_service_client${simple_service_client_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_target_libraries(simple_service_client${catkin_LIBRARIES})
+add_executable(simple_service_client src/simple_service_client.cpp)
+add_dependencies(simple_service_client ${simple_service_client_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(simple_service_client ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
