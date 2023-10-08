@@ -1,23 +1,30 @@
 #include "ros/ros.h"
 #include "std_srvs/Empty.h"
-// Import the service message header file generated from the Empty.srv message
+#include <geometry_msgs/Twist.h>
 
-// We define the callback function of the service
-bool my_callback(std_srvs::Empty::Request  &req,
-                 std_srvs::Empty::Response &res)
-{  
-  // res.some_variable = req.some_variable + req.other_variable;
-  ROS_INFO("My_callback has been called"); // We print an string whenever the Service gets called
+ros::Publisher thing;
+geometry_msgs::Twist thing2;
+
+bool my_callback(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res)
+
+{
+  ROS_INFO("The created service has been called");
+  thing2.linear.x = .2;
+  thing2.angular.z = .2;
+  thing.publish(thing2);
+  ROS_INFO("Created service has finished");
   return true;
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   ros::init(argc, argv, "service_server");
-  ros::NodeHandle nh;
+  ros::NodeHandle name;
 
-  ros::ServiceServer my_service = nh.advertiseService("/my_service", my_callback); // create the Service called                                                                                          // my_service with the defined                                                                                        // callback
-  ros::spin(); // mantain the service open.
+  ros::ServiceServer my_service =
+      name.advertiseService("/move_bb8_circle", my_callback);
+  thing = name.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
+  ROS_INFO("The Service for moving bb 8 is ready");
+  ros::spin();
 
   return 0;
 }
