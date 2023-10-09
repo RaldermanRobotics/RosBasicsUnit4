@@ -1,4 +1,0 @@
-
-<launch>
-    <node pkg="topic_subscriber" type="subscribe" name="variable" output="screen"/>
-</launch>

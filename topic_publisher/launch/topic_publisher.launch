@@ -1,5 +1,0 @@
-<launch>
-    <!-- My Package launch file -->
-    <node pkg="topic_publisher" type="simple_topic" name="counter"  output="screen">
-    </node>
-</launch>
