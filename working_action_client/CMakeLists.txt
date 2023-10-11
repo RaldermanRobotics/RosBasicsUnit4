@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(action_client_pkg)
+project(working_action_client)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -103,7 +103,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES action_client_pkg
+#  LIBRARIES working_action_client
 #  CATKIN_DEPENDS actionlib roscpp
 #  DEPENDS system_lib
 )
@@ -121,7 +121,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/action_client_pkg.cpp
+#   src/${PROJECT_NAME}/working_action_client.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -132,7 +132,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/action_client_pkg_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/working_action_client_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -149,9 +149,11 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
+
 add_executable(ardrone_action_client src/ardrone_action_client.cpp)
 add_dependencies(ardrone_action_client ${ardrone_action_client_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(ardrone_action_client ${catkin_LIBRARIES})
+
 
 #############
 ## Install ##
@@ -200,7 +202,7 @@ target_link_libraries(ardrone_action_client ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_action_client_pkg.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_working_action_client.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
