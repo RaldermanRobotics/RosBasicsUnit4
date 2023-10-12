@@ -25,7 +25,7 @@ void feedbackCb(const ardrone_as::ArdroneFeedbackConstPtr &feedback) {
 }
 
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "drone_action_client");
+  ros::init(argc, argv, "move");
   ros::NodeHandle n;
   actionlib::SimpleActionClient<ardrone_as::ArdroneAction> client(
       "ardrone_action_server", true);
