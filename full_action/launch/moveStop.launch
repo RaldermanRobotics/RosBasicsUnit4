@@ -1,3 +1,3 @@
 <launch>
-    <node pkg="full_action" type="move" name="move" output="screen"/>
+    <node pkg="full_action" type="moveStop" name="move" output="screen"/>
 </launch>

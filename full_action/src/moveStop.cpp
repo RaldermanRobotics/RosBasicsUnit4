@@ -5,7 +5,6 @@
 
 int nImage = 0;
 
-
 void doneCb(const actionlib::SimpleClientGoalState &state,
             const ardrone_as::ArdroneResultConstPtr &result) {
   ROS_INFO("[State Result]: %s", state.toString().c_str());
@@ -43,6 +42,10 @@ int main(int argc, char **argv) {
   thingout.linear.x = 0.5;
   thingout.angular.z = 0.5;
 
+  geometry_msgs::Twist nomove;
+  thingout.linear.x = 0;
+  thingout.angular.z = 0;
+
   while (state_result == actionlib::SimpleClientGoalState::ACTIVE ||
          state_result == actionlib::SimpleClientGoalState::PENDING) {
     ROS_INFO("hopefully moving");
@@ -53,5 +56,13 @@ int main(int argc, char **argv) {
     ROS_INFO("[State Result]: %s", state_result.toString().c_str());
   }
 
+  if (state_result == actionlib::SimpleClientGoalState::SUCCEEDED) {
+    ROS_INFO("Success and we're stopping");
+    effector.publish(nomove);
+    ros::spinOnce();
+    loop_rate.sleep();
+    state_result = client.getState();
+    ROS_INFO("[State Result]: %s", state_result.toString().c_str());
+  }
   return 0;
 }
