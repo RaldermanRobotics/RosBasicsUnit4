@@ -43,8 +43,8 @@ int main(int argc, char **argv) {
   thingout.angular.z = 0.5;
 
   geometry_msgs::Twist nomove;
-  thingout.linear.x = 0;
-  thingout.angular.z = 0;
+  nomove.linear.x = 0;
+  nomove.angular.z = 0;
 
   while (state_result == actionlib::SimpleClientGoalState::ACTIVE ||
          state_result == actionlib::SimpleClientGoalState::PENDING) {
