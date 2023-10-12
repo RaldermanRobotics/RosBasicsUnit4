@@ -1,13 +1,10 @@
-#include <actionlib/client/simpe_action_client.h>
-#include <ardrone.as/ArdroneAction.h>
+#include <actionlib/client/simple_action_client.h>
+#include <ardrone_as/ArdroneAction.h> // Note: "Action" is appended
 #include <geometry_msgs/Twist.h>
 #include <ros/ros.h>
 
-#include <actionlib/client/simple_action_client.h>
-#include <ardrone_as/ArdroneAction.h> // Note: "Action" is appended
-#include <ros/ros.h>
-
 int nImage = 0;
+
 
 void doneCb(const actionlib::SimpleClientGoalState &state,
             const ardrone_as::ArdroneResultConstPtr &result) {
@@ -41,7 +38,6 @@ int main(int argc, char **argv) {
   ROS_INFO("[State Result]: %s", state_result.toString().c_str());
 
   ros::Publisher effector = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
-  ros::Rate loop_rate(2);
 
   geometry_msgs::Twist thingout;
   thingout.linear.x = 0.5;

@@ -1,3 +1,0 @@
-<launch>
-    <node pkg="fullAction" type="action_client" name="drone_action_client" output="screen"/>
-</launch>
