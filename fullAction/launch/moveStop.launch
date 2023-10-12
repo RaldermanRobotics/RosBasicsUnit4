@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="fullAction" type="drone_action_client" name="move" output="screen"/>
+</launch>
