@@ -154,6 +154,14 @@ add_executable(ardrone_action_client src/ardrone_action_client.cpp)
 add_dependencies(ardrone_action_client ${ardrone_action_client_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(ardrone_action_client ${catkin_LIBRARIES})
 
+add_executable(wait src/wait.cpp)
+add_dependencies(wait ${wait_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(wait ${catkin_LIBRARIES})
+
+add_executable(noWait src/noWait.cpp)
+add_dependencies(noWait ${noWait_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(noWait ${catkin_LIBRARIES})
+
 
 #############
 ## Install ##
