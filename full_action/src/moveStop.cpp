@@ -1,10 +1,6 @@
-#include <actionlib/client/simpe_action_client.h>
-#include <ardrone.as/ArdroneAction.h>
-#include <geometry_msgs/Twist.h>
-#include <ros/ros.h>
-
 #include <actionlib/client/simple_action_client.h>
 #include <ardrone_as/ArdroneAction.h> // Note: "Action" is appended
+#include <geometry_msgs/Twist.h>
 #include <ros/ros.h>
 
 int nImage = 0;
@@ -41,11 +37,14 @@ int main(int argc, char **argv) {
   ROS_INFO("[State Result]: %s", state_result.toString().c_str());
 
   ros::Publisher effector = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
-  ros::Rate loop_rate(2);
 
   geometry_msgs::Twist thingout;
   thingout.linear.x = 0.5;
   thingout.angular.z = 0.5;
+
+  geometry_msgs::Twist nomove;
+  thingout.linear.x = 0;
+  thingout.angular.z = 0;
 
   while (state_result == actionlib::SimpleClientGoalState::ACTIVE ||
          state_result == actionlib::SimpleClientGoalState::PENDING) {
@@ -57,5 +56,13 @@ int main(int argc, char **argv) {
     ROS_INFO("[State Result]: %s", state_result.toString().c_str());
   }
 
+  if (state_result == actionlib::SimpleClientGoalState::SUCCEEDED) {
+    ROS_INFO("Success and we're stopping");
+    effector.publish(nomove);
+    ros::spinOnce();
+    loop_rate.sleep();
+    state_result = client.getState();
+    ROS_INFO("[State Result]: %s", state_result.toString().c_str());
+  }
   return 0;
 }
