@@ -150,6 +150,9 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+add_executable(another src/another.cpp)
+add_dependencies(another ${another_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(another ${catkin_LIBARRIES})
 
 #############
 ## Install ##

@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="practice_ck2" type="another" name="rotate_node" output="screen"/>
+</launch>
