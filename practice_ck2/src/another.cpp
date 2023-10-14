@@ -2,27 +2,33 @@
 #include "ros/ros.h"
 #include "std_srvs/Empty.h"
 
+
+
 class SubscribeAndPublish {
 private:
   ros::NodeHandle n_;
+  ros::ServiceServer ss_;
   ros::Publisher pub_;
   ros::Subscriber sub_;
 
 public:
-  SubscribeAndPublish() {
-    // Topic you want to publish
-    pub_ = n_.advertise<PUBLISHED_MESSAGE_TYPE>("/published_topic", 1);
+  SubscribeAndPublish(degrees) {
 
-    // Topic you want to subscribe
-    sub_ = n_.subscribe("/subscribed_topic", 1, &SubscribeAndPublish::callback,
-                        this);
+    pub_ = n_.advertise<geometry_msgs::Twist>("/cmd_vel", 1000);
+
+
+    sub_ = n_.subscribe("/odom", 1, &SubscribeAndPublish::callback);
+
+    ss_ = n_.advertiseService("rotate_robot", callback);
   }
 
-  void callback(const SUBSCRIBED_MESSAGE_TYPE &input) {
+  void callback(const nav_msgs/Odometry &input) {
     PUBLISHED_MESSAGE_TYPE output;
     //.... do something with the input and generate the output...
     pub_.publish(output);
   }
+
+  void information()
 
 }; // End of class SubscribeAndPublish
 
