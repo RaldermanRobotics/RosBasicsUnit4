@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="testing_service" type="testing" name="my_quaterion_to_euler" output="screen" />
+</launch>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(practice_ck2)
+project(testing_service)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -9,10 +9,11 @@ project(practice_ck2)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   actionlib
+  cmath
   geometry_msgs
+  nav_msgs
   roscpp
-  std_msgs
-  message_generation
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -56,10 +57,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
- add_service_files(
-   FILES
-   custom_service_messages.srv
- )
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -69,12 +71,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  geometry_msgs
-  std_msgs
-  nav_msgs
-)
+# generate_messages(
+#   DEPENDENCIES
+#   geometry_msgs#   nav_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -106,10 +106,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  #INCLUDE_DIRS include
-  #LIBRARIES practice_ck2
-  CATKIN_DEPENDS actionlib geometry_msgs roscpp std_msgs nav_msgs
-  #DEPENDS system_lib
+#  INCLUDE_DIRS include
+#  LIBRARIES testing_service
+#  CATKIN_DEPENDS actionlib cmath geometry_msgs nav_msgs roscpp tf
+#  DEPENDS system_lib
 )
 
 ###########
@@ -125,7 +125,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/practice_ck2.cpp
+#   src/${PROJECT_NAME}/testing_service.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -136,7 +136,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/practice_ck2_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/testing_service_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -152,11 +152,9 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-
-add_executable(ros_service src/ros_service.cpp)
-add_dependencies(ros_service ${ros_service_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(ros_service ${catkin_LIBRARIES})
-
+add_executable(testing src/testinc.cpp)
+add_dependencies(testing ${testing_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(testing ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -205,7 +203,7 @@ target_link_libraries(ros_service ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_practice_ck2.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_testing_service.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

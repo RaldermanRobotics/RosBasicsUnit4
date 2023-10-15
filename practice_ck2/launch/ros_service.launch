@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="practice_ck2" type="ros_service" name="rotate_node" output="screen" />
+</launch>
